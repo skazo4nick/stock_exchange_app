@@ -26,21 +26,17 @@ def fetch_stock_prices():
     query = "SELECT * FROM stock_schema.stock_prices;"
     data = pd.read_sql(query, conn)
     conn.close()
-    return data
+    return pd.DataFrame(data)
 
-# Button to load and display data
-if st.button('Load Stock Prices Data'):
-    with st.spinner("Connecting to Snowflake and retrieving data..."):
-        data = fetch_stock_prices()
-        st.success("Data loaded successfully!")
-        st.dataframe(data)
-      
 # Button to visualize OPEN_PRICE and CLOSE_PRICE
 if st.button('Visualize Open and Close Prices'):
     with st.spinner("Loading data for visualization..."):
         data = fetch_stock_prices()
-        
+
         if not data.empty:
+            # Ensure data is a DataFrame
+            data = pd.DataFrame(data)
+            
             # Plotting open and close prices
             plt.figure(figsize=(10, 5))
             plt.plot(data['trade_date'], data['open_price'], label='Open Price', marker='o')
@@ -55,4 +51,4 @@ if st.button('Visualize Open and Close Prices'):
             # Display the plot in Streamlit
             st.pyplot(plt)
         else:
-            st.write("No data available for visualization.")
+            st.error("No data available for visualization.")
