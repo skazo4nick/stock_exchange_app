@@ -28,6 +28,16 @@ def fetch_stock_prices():
     conn.close()
     return pd.DataFrame(data)
 
+# Button to load and display data
+if st.button('Load Stock Prices Data'):
+    with st.spinner("Connecting to Snowflake and retrieving data..."):
+        data = fetch_stock_prices()
+        if not data.empty:
+            st.success("Data loaded successfully!")
+            st.dataframe(data)
+        else:
+            st.error("No data found in the table.")
+
 # Button to visualize OPEN_PRICE and CLOSE_PRICE
 if st.button('Visualize Open and Close Prices'):
     with st.spinner("Loading data for visualization..."):
