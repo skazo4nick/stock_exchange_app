@@ -9,12 +9,12 @@ st.title("Stock Prices Data Viewer v0.0.1")
 @st.cache_resource
 def create_snowflake_connection():
     conn = snowflake.connector.connect(
-        user='YOUR_SNOWFLAKE_USER',
-        password='YOUR_SNOWFLAKE_PASSWORD',
-        account='YOUR_SNOWFLAKE_ACCOUNT',
-        warehouse='YOUR_WAREHOUSE',
-        database='YOUR_DATABASE',
-        schema='YOUR_SCHEMA'
+        user=st.secrets["snowflake"]["user"],
+        password=st.secrets["snowflake"]["password"],
+        account=st.secrets["snowflake"]["account"],
+        warehouse=st.secrets["snowflake"]["warehouse"],
+        database=st.secrets["snowflake"]["database"],
+        schema=st.secrets["snowflake"]["schema"]
     )
     return conn
 
