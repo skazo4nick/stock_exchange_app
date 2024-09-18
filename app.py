@@ -3,7 +3,7 @@ import snowflake.connector
 import pandas as pd
 
 # Streamlit app configuration
-st.title("Stock Prices Data Viewer")
+st.title("Stock Prices Data Viewer v0.0.1")
 
 # Snowflake connection details
 @st.cache_resource
