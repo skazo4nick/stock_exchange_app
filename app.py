@@ -22,7 +22,7 @@ def create_snowflake_connection():
 # Fetch data from Snowflake
 def fetch_stock_prices():
     conn = create_snowflake_connection()
-    query = "SELECT * FROM stock_prices;"
+    query = "SELECT * FROM stock_schema.stock_prices;"
     data = pd.read_sql(query, conn)
     conn.close()
     return data
