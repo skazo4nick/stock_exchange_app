@@ -55,4 +55,4 @@ if st.button('Visualize Open and Close Prices'):
             # Display the plot in Streamlit
             st.pyplot(plt)
         else:
-            st.error("No data available for visualization.")
+            st.write("No data available for visualization.")
