@@ -1,6 +1,7 @@
 import streamlit as st
 import snowflake.connector
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # Streamlit app configuration
 st.title("Stock Prices Data Viewer v0.0.1")
@@ -34,3 +35,24 @@ if st.button('Load Stock Prices Data'):
         st.success("Data loaded successfully!")
         st.dataframe(data)
       
+# Button to visualize OPEN_PRICE and CLOSE_PRICE
+if st.button('Visualize Open and Close Prices'):
+    with st.spinner("Loading data for visualization..."):
+        data = fetch_stock_prices()
+        
+        if not data.empty:
+            # Plotting open and close prices
+            plt.figure(figsize=(10, 5))
+            plt.plot(data['trade_date'], data['open_price'], label='Open Price', marker='o')
+            plt.plot(data['trade_date'], data['close_price'], label='Close Price', marker='x')
+            plt.title('Open vs Close Prices')
+            plt.xlabel('Trade Date')
+            plt.ylabel('Price')
+            plt.xticks(rotation=45)
+            plt.legend()
+            plt.tight_layout()
+            
+            # Display the plot in Streamlit
+            st.pyplot(plt)
+        else:
+            st.error("No data available for visualization.")
