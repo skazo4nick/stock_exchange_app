@@ -4,8 +4,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Streamlit app configuration
-st.title("Stock Prices Data Viewer v0.0.2")
+st.title("Stock Prices Data Viewer")
 st.write("This application displays the latest stocks from NASDAQ")
+st.write("v0.0.2")
 
 # Snowflake connection details
 @st.cache_resource
